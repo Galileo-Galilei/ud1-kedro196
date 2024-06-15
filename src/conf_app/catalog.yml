@@ -41,7 +41,7 @@
 
 companies:
   type: pandas.CSVDataset
-  filepath: data/01_raw/companies.csv
+  filepath: ${runtime_params:companies_filepath, data/01_raw/companies.csv}
 
 reviews:
   type: pandas.CSVDataset

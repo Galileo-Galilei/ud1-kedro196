@@ -1,6 +1,6 @@
 model_options:
   test_size: 0.2
-  random_state: 3
+  random_state: ${runtime_params:random_state, 3}
   features:
     - engines
     - passenger_capacity

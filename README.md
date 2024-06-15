@@ -43,3 +43,21 @@ CONFIG_LOADER_ARGS = {
 **Drawbacks**: 
 - (nitpick) You need to type ``kedro run -e conf/my_env`` instead of ``kedro run -e my_env``
 - (major) The may default is that we cannot merge 2 configuration which are not inside the same folder (here we assume that they are subfolders of the root folder). This prevents deploying configuration by passing ``conf_source`` [through the CLI with ``kedro run --conf-source=<path-to-new-conf-folder>``](https://docs.kedro.org/en/stable/configuration/configuration_basics.html#how-to-change-the-configuration-source-folder-at-runtime) because th python code and the other conf lives in two different directories. This would really be a blocker for deployment, xcept if the only changes you make come from ``runtime_params`` 
+
+
+### Exposing configuration with runtime_params
+
+**Advantages**:
+- Works out of the box, since ``OmegaConfigLoader`` is the default and the ``runtime_params`` is a native resolver. 
+
+**Drawbacks**: 
+- no log if invalid param (which does not exist)
+- no log to indicate that the param is overriden when it works
+- no CLI command to see which runtime_params are available ``kedro config list_runtime_params -p <pipeline>``
+- not possible to create this LCI command locally because of https://github.com/kedro-org/kedro/issues/2973
+
+
+### Exposing credentials
+
+- Possible to create a custom resolver and register it. 
+- Why not make ``oc.env`` registered by default? List issues because this has been discussed a lot. 
