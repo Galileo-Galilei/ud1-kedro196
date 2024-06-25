@@ -150,3 +150,5 @@ venv.bak/
 # mypy
 .mypy_cache/
 notebooks/*
+
+stats.json

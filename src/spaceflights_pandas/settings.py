@@ -20,17 +20,18 @@ https://docs.kedro.org/en/stable/kedro_project_setup/settings.html."""
 #     "path": "./sessions"
 # }
 
-# Directory that holds configuration.
-CONF_SOURCE = "."
+from pathlib import Path
 
+# Directory that holds configuration.
+# CONF_SOURCE = "conf"
 # Class that manages how configuration is loaded.
 from kedro.config import OmegaConfigLoader  # noqa: E402
 
 CONFIG_LOADER_CLASS = OmegaConfigLoader
 # Keyword arguments to pass to the `CONFIG_LOADER_CLASS` constructor.
 CONFIG_LOADER_ARGS = {
-    "base_env": "src/conf_app",
-    "default_run_env": "conf/local",
+    "base_env": (Path(__file__).parents[1] / "conf_app").as_posix(),
+    "default_run_env": "local",
     #       "config_patterns": {
     #           "spark" : ["spark*/"],
     #           "parameters": ["parameters*", "parameters*/**", "**/parameters*"],
